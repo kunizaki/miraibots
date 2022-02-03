@@ -6,63 +6,102 @@
 
 WHATICKET: https://github.com/canove/whaticket
 
+
 Serviço no Windows
+
 Instalar o Git: https://git-scm.com/downloads
+
 Instalar o Docker: https://www.docker.com/products/docker-desktop
+
 Instalar o Node: https://nodejs.org/pt-br/download/
+
 
 
 ​INICIAR O PRIMEIRO GIT
 
 docker run --name whaticketdb -e MYSQL_ROOT_PASSWORD=strongpassword -e MYSQL_DATABASE=whaticket -e MYSQL_USER=whaticket -e MYSQL_PASSWORD=whaticket --restart always -p 3306:3306 -d mariadb:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
 
+
 git clone https://github.com/canove/whaticket.git 
+
 cd whaticket 
+
 cd backend 
+
 CRIAR O ARQUIVO .ENV
 
+
 NODE_ENV=
+
 BACKEND_URL=http://localhost
+
 FRONTEND_URL=http://localhost:3000
+
 PROXY_PORT=8080
+
 PORT=8080
 
 
+
 DB_DIALECT=mysql
+
 DB_HOST=localhost
+
 DB_USER=whaticket
+
 DB_PASS=strongpassword
+
 DB_NAME=whaticket
 
+
 JWT_SECRET=3123123213123
+
 ​JWT_REFRESH_SECRET=75756756756
+
+
 
 ​VOLTAR PARA O GIT
 
 npm install 
+
 npm run build 
+
 docker exec -it whaticketdb mysql -uroot -p
+
 CREATE USER 'whaticket'@'172.17.0.1' IDENTIFIED BY 'strongpassword'; 
+
 GRANT ALL PRIVILEGES ON *.* TO 'whaticket'@'172.17.0.1' WITH GRANT OPTION; 
+
 FLUSH PRIVILEGES; 
+
 exit 
+
 npx sequelize db:migrate 
+
 npx sequelize db:seed:all 
+
 npm start 
+
 
 
 INICIAR O SEGUNDO GIT
 
 cd whaticket 
+
 cd frontend 
+
+
+
 CRIAR O ARQUIVO .ENV
 
 REACT_APP_BACKEND_URL = http://localhost:8080/ 
 
 
+
 VOLTAR PARA O SEGUNDO GIT
 
 npm install 
+
 npm start 
 
 
