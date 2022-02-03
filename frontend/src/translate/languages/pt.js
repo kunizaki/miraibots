@@ -18,13 +18,13 @@ const messages = {
         },
       },
       login: {
-        title: "Login",
+        title: "Faça o seu login agora",
         form: {
-          email: "Email",
-          password: "Senha",
+          email: "Insira o e-mail",
+          password: "Coloque a sua senha",
         },
         buttons: {
-          submit: "Entrar",
+          submit: "Fazer login",
           register: "Não tem um conta? Cadastre-se!",
         },
       },
@@ -39,20 +39,9 @@ const messages = {
             title: "Tickets hoje: ",
           },
         },
-        messages: {
-          inAttendance: {
-            title: "Em Atendimento"
-          },
-          waiting: {
-            title: "Aguardando"
-          },
-          closed: {
-            title: "Finalizado"
-          }
-        }
       },
       connections: {
-        title: "Conexões",
+        title: "Conexões do WhatsApp",
         toasts: {
           deleted: "Conexão com o WhatsApp excluída com sucesso!",
         },
@@ -249,8 +238,6 @@ const messages = {
       transferTicketModal: {
         title: "Transferir Ticket",
         fieldLabel: "Digite para buscar usuários",
-        fieldQueueLabel: "Transferir para fila",
-        fieldQueuePlaceholder: "Selecione uma fila",
         noOptions: "Nenhum usuário encontrado com esse nome",
         buttons: {
           ok: "Transferir",
@@ -287,6 +274,13 @@ const messages = {
           administration: "Administração",
           users: "Usuários",
           settings: "Configurações",
+          ZDG: "Envio Automático",
+          ZDGMedia: "Envio de Mídia",
+          ZDGGroups: "Grupos",
+          Direct: "Direct IG",
+          SMS: "SMS",
+          VoiceCall: "Chamada Telefônica"
+
         },
         appBar: {
           user: {
@@ -383,7 +377,7 @@ const messages = {
         },
       },
       messagesInput: {
-        placeholderOpen: "Digite uma mensagem ou tecle ''/'' para utilizar as respostas rápidas cadastrada",
+        placeholderOpen: "Digite uma mensagem",
         placeholderClosed:
           "Reabra ou aceite esse ticket para enviar uma mensagem.",
         signMessage: "Assinar",

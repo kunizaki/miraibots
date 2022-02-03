@@ -7,7 +7,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Divider from "@material-ui/core/Divider";
 import { Badge } from "@material-ui/core";
-import DashboardOutlinedIcon from "@material-ui/icons/DashboardOutlined";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import SyncAltIcon from "@material-ui/icons/SyncAlt";
 import SettingsOutlinedIcon from "@material-ui/icons/SettingsOutlined";
@@ -15,6 +14,13 @@ import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
 import ContactPhoneOutlinedIcon from "@material-ui/icons/ContactPhoneOutlined";
 import AccountTreeOutlinedIcon from "@material-ui/icons/AccountTreeOutlined";
 import QuestionAnswerOutlinedIcon from "@material-ui/icons/QuestionAnswerOutlined";
+import BallotIcon from '@material-ui/icons/Ballot';
+import GroupIcon from '@material-ui/icons/Group';
+import SendIcon from '@material-ui/icons/Send';
+import TextsmsIcon from '@material-ui/icons/Textsms';
+import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
+import BurstModeIcon from '@material-ui/icons/BurstMode';
+import InstagramIcon from '@material-ui/icons/Instagram';
 
 import { i18n } from "../translate/i18n";
 import { WhatsAppsContext } from "../context/WhatsApp/WhatsAppsContext";
@@ -73,11 +79,6 @@ const MainListItems = (props) => {
   return (
     <div onClick={drawerClose}>
       <ListItemLink
-        to="/"
-        primary="Dashboard"
-        icon={<DashboardOutlinedIcon />}
-      />
-      <ListItemLink
         to="/connections"
         primary={i18n.t("mainDrawer.listItems.connections")}
         icon={
@@ -85,6 +86,11 @@ const MainListItems = (props) => {
             <SyncAltIcon />
           </Badge>
         }
+      />
+      <ListItemLink
+        to="/"
+        primary="Dashboard"
+        icon={<BallotIcon />}
       />
       <ListItemLink
         to="/tickets"
@@ -101,6 +107,36 @@ const MainListItems = (props) => {
         to="/quickAnswers"
         primary={i18n.t("mainDrawer.listItems.quickAnswers")}
         icon={<QuestionAnswerOutlinedIcon />}
+      />
+      <ListItemLink
+              to="/ZDG"
+              primary={i18n.t("mainDrawer.listItems.ZDG")}
+              icon={<SendIcon />}
+      />
+      <ListItemLink
+              to="/ZDGMedia"
+              primary={i18n.t("mainDrawer.listItems.ZDGMedia")}
+              icon={<BurstModeIcon />}
+      />
+      <ListItemLink
+              to="/ZDGGroups"
+              primary={i18n.t("mainDrawer.listItems.ZDGGroups")}
+              icon={<GroupIcon />}
+      />
+      <ListItemLink
+              to="/InstaDirect"
+              primary={i18n.t("mainDrawer.listItems.Direct")}
+              icon={<InstagramIcon />}
+      />
+      <ListItemLink
+              to="/SMS"
+              primary={i18n.t("mainDrawer.listItems.SMS")}
+              icon={<TextsmsIcon />}
+      />
+      <ListItemLink
+              to="/VoiceCall"
+              primary={i18n.t("mainDrawer.listItems.VoiceCall")}
+              icon={<PhoneInTalkIcon />}
       />
       <Can
         role={user.profile}

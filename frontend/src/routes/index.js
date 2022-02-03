@@ -13,6 +13,12 @@ import Users from "../pages/Users";
 import Contacts from "../pages/Contacts/";
 import QuickAnswers from "../pages/QuickAnswers/";
 import Queues from "../pages/Queues/";
+import ZDG from "../pages/ZDG/";
+import ZDGMedia from "../pages/ZDGMedia/";
+import ZDGGroups from "../pages/ZDGGroups/";
+import InstaDirect from "../pages/InstaDirect/";
+import SMS from "../pages/SMS/";
+import VoiceCall from "../pages/VoiceCall/";
 import { AuthProvider } from "../context/Auth/AuthContext";
 import { WhatsAppsProvider } from "../context/WhatsApp/WhatsAppsContext";
 import Route from "./Route";
@@ -49,6 +55,12 @@ const Routes = () => {
               />
               <Route exact path="/Settings" component={Settings} isPrivate />
               <Route exact path="/Queues" component={Queues} isPrivate />
+              <Route exact path="/ZDG" component={ZDG} isPrivate />
+              <Route exact path="/ZDGMedia" component={ZDGMedia} isPrivate />
+              <Route exact path="/ZDGGroups" component={ZDGGroups} isPrivate />
+              <Route exact path="/InstaDirect" component={InstaDirect} isPrivate />
+              <Route exact path="/SMS" component={SMS} isPrivate />
+              <Route exact path="/VoiceCall" component={VoiceCall} isPrivate />
             </LoggedInLayout>
           </WhatsAppsProvider>
         </Switch>
