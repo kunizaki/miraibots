@@ -4,8 +4,6 @@ import AppError from "../../errors/AppError";
 import GetTicketWbot from "../../helpers/GetTicketWbot";
 import Ticket from "../../models/Ticket";
 
-import formatBody from "../../helpers/Mustache";
-
 interface Request {
   media: Express.Multer.File;
   ticket: Ticket;
@@ -19,16 +17,13 @@ const SendWhatsAppMedia = async ({
 }: Request): Promise<WbotMessage> => {
   try {
     const wbot = await GetTicketWbot(ticket);
-    const hasBody = body
-      ? formatBody(body as string, ticket.contact)
-      : undefined;
 
     const newMedia = MessageMedia.fromFilePath(media.path);
     const sentMessage = await wbot.sendMessage(
       `${ticket.contact.number}@${ticket.isGroup ? "g" : "c"}.us`,
       newMedia,
       {
-        caption: hasBody,
+        caption: body,
         sendAudioAsVoice: true
       }
     );
@@ -39,7 +34,6 @@ const SendWhatsAppMedia = async ({
 
     return sentMessage;
   } catch (err) {
-    console.log(err);
     throw new AppError("ERR_SENDING_WAPP_MSG");
   }
 };

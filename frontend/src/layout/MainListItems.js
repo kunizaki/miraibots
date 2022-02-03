@@ -21,6 +21,9 @@ import TextsmsIcon from '@material-ui/icons/Textsms';
 import PhoneInTalkIcon from '@material-ui/icons/PhoneInTalk';
 import BurstModeIcon from '@material-ui/icons/BurstMode';
 import InstagramIcon from '@material-ui/icons/Instagram';
+import ChatIcon from '@material-ui/icons/Chat';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import SubjectIcon from '@material-ui/icons/Subject';
 
 import { i18n } from "../translate/i18n";
 import { WhatsAppsContext } from "../context/WhatsApp/WhatsAppsContext";
@@ -107,6 +110,21 @@ const MainListItems = (props) => {
         to="/quickAnswers"
         primary={i18n.t("mainDrawer.listItems.quickAnswers")}
         icon={<QuestionAnswerOutlinedIcon />}
+      />
+      <ListItemLink
+              to="/ZDGChatbot"
+              primary={i18n.t("mainDrawer.listItems.ZDGChatbot")}
+        icon={<ChatIcon />}
+      />
+      <ListItemLink
+              to="/ZDGAgendamento"
+              primary={i18n.t("mainDrawer.listItems.ZDGAgendamento")}
+              icon={<ScheduleIcon />}
+      />
+      <ListItemLink
+              to="/ZDGHistorico"
+              primary={i18n.t("mainDrawer.listItems.ZDGHistorico")}
+              icon={<SubjectIcon />}
       />
       <ListItemLink
               to="/ZDG"

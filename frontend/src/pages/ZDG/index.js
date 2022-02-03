@@ -6,7 +6,7 @@ import Container from "@material-ui/core/Container";
 const http = require('https');
 
 const init = {
-  host: 'newapi.zapdasgalaxias.com.br',
+  host: process.env.REACT_APP_BACKEND_URL.split("//")[1],
   path: '/zdg',
   method: 'POST',
   headers: {
@@ -33,9 +33,8 @@ async function ZDGSender(number, message, iD) {
 }
 
 const init2 = {
-	host: 'newapi.zapdasgalaxias.com.br',
-	path: '/whatsappzdg',
-	method: 'GET',
+	host: process.env.REACT_APP_BACKEND_URL.split("//")[1],
+	path: '/whatsappzdg'
   };
   
 async function GETSender() {

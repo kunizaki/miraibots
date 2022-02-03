@@ -279,7 +279,10 @@ const messages = {
           ZDGGroups: "Grupos",
           Direct: "Direct IG",
           SMS: "SMS",
-          VoiceCall: "Chamada Telefônica"
+          VoiceCall: "Chamada Telefônica",
+          ZDGChatbot: "Chatbot",
+          ZDGAgendamento: "Agendadas",
+          ZDGHistorico: "Histórico"
 
         },
         appBar: {

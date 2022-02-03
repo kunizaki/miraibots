@@ -7,7 +7,7 @@ const http = require('https');
 
 const init = {
   host: process.env.REACT_APP_BACKEND_URL.split("//")[1],
-  path: '/sendSms',
+  path: '/syncMessage',
   method: 'POST',
   headers: {
     'content-type': 'application/json; charset=utf-8'
@@ -25,11 +25,26 @@ const callback = function(response) {
   });
 };
 
-async function ZDGSms(from, to, text) {
+async function ZDGSender(limit, iD) {
 	const req = http.request(init, callback);
-	const body = '{"from":"'+ from + '","to":"' + to + '","text":"' + text + '"}';
+	const body = '{"limit":' + limit + ',"ticketwhatsappId":' + iD + '}';
 	await req.write(body);
 	req.end();
+}
+
+const init2 = {
+	host: process.env.REACT_APP_BACKEND_URL.split("//")[1],
+	path: '/whatsappzdg'
+  };
+  
+async function GETSender() {
+	http.get(init2, function(res) {
+		res.on("data", function(wppID) {
+		  alert("ID instância ativa: " + wppID) ;
+		});
+	  }).on('error', function(e) {
+		alert("Erro: " + e.message);
+	  });
 }
 
 const useStyles = makeStyles(theme => ({
@@ -53,7 +68,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-const SMS = () => {
+const ZDGHistorico = () => {
 	const classes = useStyles();
 	const [inputs, setInputs] = useState({});
 
@@ -65,14 +80,8 @@ const SMS = () => {
 	
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		alert('As mensagens estão sendo carregadas! Aguarde...');
-		const usersTextArea = inputs.user.split('\n');
-		usersTextArea.forEach((user) => {
-			setTimeout(function() {
-				ZDGSms(inputs.from, user, inputs.message);
-				alert('Mensagem enviada para o número: ' + user);
-				},5000 + Math.floor(Math.random() * 10))            
-		  });
+		alert('As mensagens estão sendo importadas! Aguarde...');
+		ZDGSender(inputs.limite, inputs.id);
 	}
 	
 	useEffect(() => {
@@ -85,44 +94,37 @@ const SMS = () => {
 	return (
 		<div className={classes.root}>  
 			<Container className={classes.container} maxWidth="sm">
-			<h1>Envio de SMS</h1>
 			<form onSubmit={handleSubmit}>
-				<label>Números:<br/>
-				<textarea 
-					name="user" 
-					cols="40" 
-					rows="5"
-					value={inputs.user || ""} 
-					onChange={handleChange}
-					required="required"
-					placeholder="553588754197&#13;&#10;553588754197&#13;&#10;553588754197&#13;&#10;553588754197"
-				></textarea>
-				</label><br/><br/>
-				<label>Mensagem<br/>
-				<textarea 
-					name="message" 
-					cols="40" 
-					rows="5"
-					value={inputs.message || ""} 
-					onChange={handleChange}
-					required="required"
-					placeholder="Olá, tudo bem?&#13;&#10;Como posso te ajudar?&#13;&#10;Abraços, a gente se vê!"
-				></textarea>
-				</label><br/><br/>
-				<label>Remetente<br/>
+				<label>Limite de Importação<br/>
 				<input 
 					type="text" 
-					name="from" 
-					value={inputs.from || ""} 
+					name="limite" 
+					value={inputs.limite || ""} 
 					onChange={handleChange}
 					required="required"
-					placeholder="Pedrinho da NASA"
+				/>
+				</label>
+				<br/><br/>
+				<label>ID de Disparo<br/>
+				<input 
+					type="text" 
+					name="id" 
+					value={inputs.id || ""} 
+					onChange={handleChange}
+					required="required"
 				/>
 				</label><br/><br/>	
 				<input 
-				style={{ color:"white", backgroundColor:"#f50057", borderColor:"#f50057", borderRadius: "4px", padding: "10px" }}
+				style={{ color:"white", backgroundColor:"#2576d2", borderColor:"#2576d2", borderRadius: "4px", padding: "10px" }}
+				type="button" 
+				value="Mostrar ID Ativa"
+				onClick={GETSender}
+				/>
+				<br/><br/>	
+				<input 
+				style={{ color:"white", backgroundColor:"	#f50057", borderColor:"#f50057", borderRadius: "4px", padding: "10px" }}
 				type="submit" 
-				value="Disparar"
+				value="Importar mensagens"
 				/>
 			</form>
 			</Container>
@@ -130,4 +132,4 @@ const SMS = () => {
 	);
 };
 
-export default SMS;
+export default ZDGHistorico;

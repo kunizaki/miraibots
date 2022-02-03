@@ -54,13 +54,13 @@ const Dashboard = () => {
 
 	const GetTickets = (status, showAll, withUnreadMessages) => {
 
-		const { count } = useTickets({
+		const { tickets } = useTickets({
 			status: status,
 			showAll: showAll,
 			withUnreadMessages: withUnreadMessages,
 			queueIds: JSON.stringify(userQueueIds)
 		});
-		return count;
+		return tickets.length;
 	}
 
 	return (

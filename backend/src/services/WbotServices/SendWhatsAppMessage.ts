@@ -6,8 +6,6 @@ import SerializeWbotMsgId from "../../helpers/SerializeWbotMsgId";
 import Message from "../../models/Message";
 import Ticket from "../../models/Ticket";
 
-import formatBody from "../../helpers/Mustache";
-
 interface Request {
   body: string;
   ticket: Ticket;
@@ -30,7 +28,7 @@ const SendWhatsAppMessage = async ({
   try {
     const sentMessage = await wbot.sendMessage(
       `${ticket.contact.number}@${ticket.isGroup ? "g" : "c"}.us`,
-      formatBody(body, ticket.contact),
+      body,
       {
         quotedMessageId: quotedMsgSerializedId,
         linkPreview: false

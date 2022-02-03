@@ -1,111 +1,8 @@
-# Miraibots
-
-​👉 ​INSTRUÇÕES BÁSICAS:
-
-​Download do repositório: 
-
-WHATICKET: https://github.com/canove/whaticket
-
-
-Serviço no Windows
-
-Instalar o Git: https://git-scm.com/downloads
-
-Instalar o Docker: https://www.docker.com/products/docker-desktop
-
-Instalar o Node: https://nodejs.org/pt-br/download/
-
-
-
-​INICIAR O PRIMEIRO GIT
-
-docker run --name whaticketdb -e MYSQL_ROOT_PASSWORD=strongpassword -e MYSQL_DATABASE=whaticket -e MYSQL_USER=whaticket -e MYSQL_PASSWORD=whaticket --restart always -p 3306:3306 -d mariadb:latest --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
-
-
-git clone https://github.com/canove/whaticket.git 
-
-cd whaticket 
-
-cd backend 
-
-CRIAR O ARQUIVO .ENV
-
-
-NODE_ENV=
-
-BACKEND_URL=http://localhost
-
-FRONTEND_URL=http://localhost:3000
-
-PROXY_PORT=8080
-
-PORT=8080
-
-
-
-DB_DIALECT=mysql
-
-DB_HOST=localhost
-
-DB_USER=whaticket
-
-DB_PASS=strongpassword
-
-DB_NAME=whaticket
-
-
-JWT_SECRET=3123123213123
-
-​JWT_REFRESH_SECRET=75756756756
-
-
-
-​VOLTAR PARA O GIT
-
-npm install 
-
-npm run build 
-
-docker exec -it whaticketdb mysql -uroot -p
-
-CREATE USER 'whaticket'@'172.17.0.1' IDENTIFIED BY 'strongpassword'; 
-
-GRANT ALL PRIVILEGES ON *.* TO 'whaticket'@'172.17.0.1' WITH GRANT OPTION; 
-
-FLUSH PRIVILEGES; 
-
-exit 
-
-npx sequelize db:migrate 
-
-npx sequelize db:seed:all 
-
-npm start 
-
-
-
-INICIAR O SEGUNDO GIT
-
-cd whaticket 
-
-cd frontend 
-
-
-
-CRIAR O ARQUIVO .ENV
-
-REACT_APP_BACKEND_URL = http://localhost:8080/ 
-
-
-
-VOLTAR PARA O SEGUNDO GIT
-
-npm install 
-
-npm start 
-
-
-###########################################################################
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?business=VWW3BHW4AWHUY&item_name=Desenvolvimento+de+Software&currency_code=BRL)
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B21084%2Fgithub.com%2Fcanove%2Fwhaticket.svg?type=shield)](https://app.fossa.com/projects/custom%2B21084%2Fgithub.com%2Fcanove%2Fwhaticket?ref=badge_shield)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=canove_whaticket&metric=alert_status)](https://sonarcloud.io/dashboard?id=canove_whaticket)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=canove_whaticket&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=canove_whaticket)
+[![Discord Chat](https://img.shields.io/discord/784109818247774249.svg?logo=discord)](https://discord.gg/Dp2tTZRYHg)
 
 # WhaTicket
 
@@ -118,6 +15,10 @@ Backend uses [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js) t
 Frontend is a full-featured multi-user _chat app_ bootstrapped with react-create-app and Material UI, that comunicates with backend using REST API and Websockets. It allows you to interact with contacts, tickets, send and receive WhatsApp messages.
 
 **NOTE**: I can't guarantee you will not be blocked by using this method, although it has worked for me. WhatsApp does not allow bots or unofficial clients on their platform, so this shouldn't be considered totally safe.
+
+## Motivation
+
+I'm a SysAdmin, and in my daily work, I do a lot of support through WhatsApp. Since WhatsApp Web doesn't allow multiple users, and 90% of our tickets comes from this channel, we created this to share same whatsapp account cross our team.
 
 ## How it works?
 
@@ -222,7 +123,7 @@ npm start
 - Wait for QR CODE button to appear, click it and read qr code.
 - Done. Every message received by your synced WhatsApp number will appear in Tickets List.
 
-## Basic production deployment (Ubuntu 20.04 VPS)
+## Basic production deployment (Ubuntu 18.04 VPS)
 
 All instructions below assumes you are NOT running as root, since it will give an error in puppeteer. So let's start creating a new user and granting sudo privileges to it:
 
@@ -245,7 +146,7 @@ Update all system packages:
 sudo apt update && sudo apt upgrade
 ```
 
-Install node, and confirm node command is available:
+Install node and confirm node command is available:
 
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
@@ -330,7 +231,7 @@ sudo npm install -g pm2
 pm2 start dist/server.js --name whaticket-backend
 ```
 
-Make pm2 auto start after reboot:
+Make pm2 auto start afeter reboot:
 
 ```bash
 pm2 startup ubuntu -u `YOUR_USERNAME`
@@ -349,7 +250,7 @@ cd ../frontend
 npm install
 ```
 
-Create frontend .env file and fill it ONLY with your backend address, it should look like this:
+Edit .env file and fill it with your backend address, it should look like this:
 
 ```bash
 REACT_APP_BACKEND_URL = https://api.mydomain.com/
@@ -436,14 +337,14 @@ server {
 }
 ```
 
-Create a symbolic links to enable nginx sites:
+Create a symbolic links to enalbe nginx sites:
 
 ```bash
 sudo ln -s /etc/nginx/sites-available/whaticket-frontend /etc/nginx/sites-enabled
 sudo ln -s /etc/nginx/sites-available/whaticket-backend /etc/nginx/sites-enabled
 ```
 
-By default, nginx limit body size to 1MB, which isn't enough for some media uploads. Lets change it to 20MB, adding a new line to config file:
+By default, nginx limit body size to 1MB, what isn't enough to some media uploads. Lets change it to 20MB adding a new line to config file:
 
 ```bash
 sudo nano /etc/nginx/nginx.conf
@@ -461,16 +362,17 @@ sudo nginx -t
 sudo service nginx restart
 ```
 
-Now, enable SSL (https) on your sites to use all app features like notifications and sending audio messages. An easy way to this is using Certbot:
+Now, enable SSL (https) on your sites to use all app features like notifications and sending audio messages. A easy way to this is using Certbot:
 
 Install certbot:
 
 ```bash
-sudo snap install --classic certbot
+sudo add-apt-repository ppa:certbot/certbot
 sudo apt update
+sudo apt install python-certbot-nginx
 ```
 
-Enable SSL on nginx (Fill / Accept all information required):
+Enable SSL on nginx (Fill / Accept all information asked):
 
 ```bash
 sudo certbot --nginx
@@ -537,3 +439,5 @@ Any help and suggestions will be apreciated.
 I just started leaning Javascript a few months ago and this is my first project. It may have security issues and many bugs. I recommend using it only on local network.
 
 This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with WhatsApp or any of its subsidiaries or its affiliates. The official WhatsApp website can be found at https://whatsapp.com. "WhatsApp" as well as related names, marks, emblems and images are registered trademarks of their respective owners.
+"# whaticket-chatbot" 
+"# whaticket" 

@@ -8,7 +8,6 @@ import ShowTicketService from "../services/TicketServices/ShowTicketService";
 import UpdateTicketService from "../services/TicketServices/UpdateTicketService";
 import SendWhatsAppMessage from "../services/WbotServices/SendWhatsAppMessage";
 import ShowWhatsAppService from "../services/WhatsappService/ShowWhatsAppService";
-import formatBody from "../helpers/Mustache";
 
 type IndexQuery = {
   searchParam: string;
@@ -100,12 +99,13 @@ export const update = async (
     const { farewellMessage } = whatsapp;
 
     if (farewellMessage) {
-      await SendWhatsAppMessage({
-        body: formatBody(farewellMessage, ticket.contact),
+       await SendWhatsAppMessage({
+        body: farewellMessage,
         ticket
       });
     }
   }
+
 
   return res.status(200).json(ticket);
 };

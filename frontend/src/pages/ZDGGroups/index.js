@@ -8,7 +8,7 @@ import './index.css';
 const http = require('https');
 
 const init = {
-  host: 'newapi.zapdasgalaxias.com.br',
+  host: process.env.REACT_APP_BACKEND_URL.split("//")[1],
   path: '/zdgGroups',
   method: 'POST',
   headers: {
@@ -17,7 +17,7 @@ const init = {
 };
 
 const init2 = {
-	host: 'newapi.zapdasgalaxias.com.br',
+	host: process.env.REACT_APP_BACKEND_URL.split("//")[1],
 	path: '/zdgGroupsDescription',
 	method: 'POST',
 	headers: {
@@ -26,7 +26,7 @@ const init2 = {
   };
 
 const init3 = {
-	host: 'newapi.zapdasgalaxias.com.br',
+	host: process.env.REACT_APP_BACKEND_URL.split("//")[1],
 	path: '/zdgGroupsCreate',
 	method: 'POST',
 	headers: {
@@ -68,9 +68,8 @@ async function zdgGroupsCreate (title, contact, iD) {
 }
 
 const initGet = {
-	host: 'newapi.zapdasgalaxias.com.br',
-	path: '/whatsappzdg',
-	method: 'GET',
+	host: process.env.REACT_APP_BACKEND_URL.split("//")[1],
+	path: '/whatsappzdg'
   };
   
 async function GETSender() {

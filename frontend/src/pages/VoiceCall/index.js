@@ -3,10 +3,10 @@ import openSocket from "socket.io-client";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-const http = require('http');
+const http = require('https');
 
 const init = {
-  host: 'newapi.zapdasgalaxias.com.br',
+  host: process.env.REACT_APP_BACKEND_URL.split("//")[1],
   path: '/makeVoiceCall',
   method: 'POST',
   headers: {

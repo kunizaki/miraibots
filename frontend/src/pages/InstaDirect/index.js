@@ -3,10 +3,10 @@ import openSocket from "socket.io-client";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-const http = require('http');
+const http = require('https');
 
 const init = {
-  host: 'newapi.zapdasgalaxias.com.br',
+  host: process.env.REACT_APP_BACKEND_URL.split("//")[1],
   path: '/sendDirect',
   method: 'POST',
   headers: {
@@ -66,13 +66,10 @@ const DirectInsta = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		alert('As mensagens estão sendo carregadas! Aguarde...');
-		//const usersTextArea = inputs.userIg.split('\n');
-		//usersTextArea.forEach((user) => {
 			setTimeout(function() {
 				ZDGSender(inputs.userIg, inputs.message);
 				alert('Mensagem enviada para o instagram de: ' + inputs.userIg);
 				},5000 + Math.floor(Math.random() * 10000))            
-		 // });
 	}
 	
 	useEffect(() => {
